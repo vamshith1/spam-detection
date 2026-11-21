@@ -2,6 +2,10 @@
 
 A machine learning app that classifies emails / text messages as **Spam** or **Ham** (not spam) using NLP preprocessing, TF-IDF features, and Naive Bayes / Logistic Regression, with a Streamlit web interface.
 
+**Live demo:** https://vn-spam-detector.streamlit.app
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://vn-spam-detector.streamlit.app)
+
 ## Project structure
 
 ```
