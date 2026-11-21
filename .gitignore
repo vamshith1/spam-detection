@@ -7,3 +7,4 @@ venv/
 .claude/
 .ipynb_checkpoints/
 .DS_Store
+spam-detection/
