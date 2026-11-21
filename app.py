@@ -2,6 +2,7 @@
 
 Run:  streamlit run app.py
 """
+import importlib
 import json
 import os
 import sys
@@ -11,7 +12,14 @@ import streamlit as st
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ROOT, "src"))
-from predict import load_artifacts, predict  # noqa: E402
+import preprocess  # noqa: E402
+import predict as predict_module  # noqa: E402
+
+# Streamlit re-runs app.py after a code update but keeps already-imported
+# modules in memory; reload them so changes in src/ take effect too.
+importlib.reload(preprocess)
+importlib.reload(predict_module)
+load_artifacts, predict = predict_module.load_artifacts, predict_module.predict
 
 st.set_page_config(page_title="Spam Detector", page_icon="📧", layout="centered")
 
