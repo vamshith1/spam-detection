@@ -6,6 +6,10 @@ A machine learning app that classifies **emails** and **SMS / text messages** as
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://vn-spam-detector.streamlit.app)
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="Spam Detector app flagging a phishing email as spam with 99% probability" width="480">
+</p>
+
 ## Highlights
 
 - Trained on **30,000+ real emails** (Enron-Spam corpus) and 5,000+ SMS messages
