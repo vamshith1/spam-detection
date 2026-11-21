@@ -1,6 +1,6 @@
 """Text cleaning for spam detection.
 
-Steps: lowercase -> replace URLs/emails/numbers with tokens -> strip punctuation
+Steps: strip HTML and "Subject:" -> lowercase -> replace URLs/emails/numbers with tokens -> strip punctuation
 -> tokenize -> drop stop words -> stem each word.
 """
 import re
@@ -19,6 +19,8 @@ except LookupError:
     STOP_WORDS = set(ENGLISH_STOP_WORDS)
 
 _stemmer = PorterStemmer()
+_HTML_RE = re.compile(r"<[^>]+>")
+_SUBJECT_RE = re.compile(r"^\s*subject\s*:", re.IGNORECASE)
 _URL_RE = re.compile(r"(https?://\S+|www\.\S+)")
 _EMAIL_RE = re.compile(r"\S+@\S+\.\S+")
 _NUM_RE = re.compile(r"\d+")
@@ -29,6 +31,10 @@ def clean_text(text: str) -> str:
     """Return a cleaned, stemmed version of a raw message."""
     if not isinstance(text, str):
         return ""
+    # Emails: drop HTML tags and the leading "Subject:" header word, so the model
+    # learns from the words themselves rather than from email formatting.
+    text = _HTML_RE.sub(" ", text)
+    text = _SUBJECT_RE.sub(" ", text)
     text = text.lower()
     # Keep the *fact* that a link/email/number was present - a strong spam signal
     text = _URL_RE.sub(" urltoken ", text)

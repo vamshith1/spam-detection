@@ -1,5 +1,9 @@
 {
   "best_model": "Logistic Regression",
+  "dataset": "spam.csv",
+  "rows": 5171,
+  "train_size": 4136,
+  "test_size": 1035,
   "results": {
     "Multinomial Naive Bayes": {
       "accuracy": 0.9845410628019323,
